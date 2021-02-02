@@ -1,0 +1,24 @@
+{
+    "name": "aliirfaan/laravel-simple-api",
+    "description": "API helper functions: Response formatting, validation",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "aliirfaan",
+            "email": "aliirfaan.freelance@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "aliirfaan\\LaravelSimpleApi\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "aliirfaan\\LaravelSimpleApi\\SimpleApiServiceProvider"
+            ]
+        }
+    }
+}
