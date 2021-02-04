@@ -23,6 +23,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com) and this p
 
 ### Fixed
 
+- nothing
+
 ## 1.2.0 - 2021-02-04
 
 ### Added
@@ -43,6 +45,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com) and this p
 
 ### Fixed
 
+- nothing
+
 ## 1.1.0 - 2021-02-04
 
 ### Added
@@ -62,3 +66,5 @@ The format is based on [Keep a Changelog](https://keepachangelog.com) and this p
 - Nothing
 
 ### Fixed
+
+- nothing
