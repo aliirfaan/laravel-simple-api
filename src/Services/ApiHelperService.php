@@ -22,6 +22,7 @@ class ApiHelperService
         'status_code' => null,
         'links' => null,
         'message' => null,
+        'extra' => null
     );
     
     /**
