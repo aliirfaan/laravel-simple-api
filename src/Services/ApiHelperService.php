@@ -74,9 +74,10 @@ class ApiHelperService
      * @param  string $namespace namespace to better log error. Example wallet, user, account
      * @param  string $errorName name of the error
      * @param  string $errorMessage user error message
+     * @param  string $statusCode HTTP status code
      * @return ApiResponseCollection
      */
-    public function apiErrorResponse($errors, $namespace, $errorName = 'VALIDATION_ERROR', $errorMessage = 'Invalid data provided')
+    public function apiErrorResponse($errors, $namespace, $errorName = 'VALIDATION_ERROR', $errorMessage = 'Invalid data provided', $statusCode = Response::HTTP_BAD_REQUEST)
     {
         $data = $this->responseArrayFormat;
         $data['errors'][] = array(
@@ -88,7 +89,7 @@ class ApiHelperService
             ),
         );
 
-        $data['status_code'] = Response::HTTP_BAD_REQUEST;
+        $data['status_code'] = $statusCode;
         $data['message'] = $errorMessage;
         
         return new ApiResponseCollection($data);
