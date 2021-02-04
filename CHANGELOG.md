@@ -3,6 +3,28 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com) and this project adheres to [Semantic Versioning](https://semver.org).
 
+## 2.0.0 - 2021-02-04
+
+### Added
+
+- Nothing
+
+### Changed
+
+- review error response format in apiErrorResponse function
+
+### Deprecated
+
+- Nothing
+
+### Removed
+
+- nothing
+
+### Fixed
+
+- nothing
+
 ## 1.3.0 - 2021-02-04
 
 ### Added
@@ -11,7 +33,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com) and this p
 
 ### Changed
 
-- aspi response function
+- api response function
 
 ### Deprecated
 
