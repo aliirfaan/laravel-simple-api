@@ -104,6 +104,6 @@ class ApiHelperService
      */
     public function generateDebugId($namespace = 'error')
     {
-        return $namespace . '-' . date('Ymdhis') . '-' .Str::random();
+        return $namespace . '-' .Str::random();
     }
 }
