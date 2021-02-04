@@ -84,9 +84,7 @@ class ApiHelperService
             'name' => $errorName,
             'debug_id' => $this->generateDebugId($namespace),
             'message' => $errorMessage,
-            'details' => array(
-                 $errors,
-            ),
+            'details' => $errors
         );
 
         $data['status_code'] = $statusCode;
