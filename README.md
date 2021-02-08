@@ -134,6 +134,55 @@ class TestController extends Controller
 }
 ```
 
+## Response for common API errors
+
+```php
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\User;
+use aliirfaan\LaravelSimpleApi\Services\ApiHelperService;
+use Symfony\Component\HttpFoundation\Response;
+
+class TestController extends Controller
+{
+    public function testApiHelper(Request $request, ApiHelperService $apiHelperService)
+    {
+        $namespace = $this->customerApiCommandModel->namespace;
+        // get your api request fields
+        $requestArray = $request->json()->all();
+        // get your validatin rules
+        $validationRules = User::$createRules;
+
+        // validation errors
+        $validationRules = $this->customerApiCommandModel->registerValidationRules();
+        $validationResult = $apiHelperService->validateRequestFields($requestArray, $validationRules);
+        if (!is_null($validationResult)) {
+            $errorResource = $apiHelperService->apiValidationErrorResponse($validationResult, $namespace);
+            return $errorResource->response()->setStatusCode($errorResource->collection['status_code']);
+        }
+
+        // database error
+        $errorResource = $apiHelperService->apiDatabaseErrorResponse($namespace);
+        return $errorResource->response()->setStatusCode($errorResource->collection['status_code']);
+
+        // unknown/general error
+        $errorResource = $apiHelperService->apiUnknownErrorResponse($namespace);
+        return $errorResource->response()->setStatusCode($errorResource->collection['status_code']);
+
+        // authentication error
+        $errorResource = $apiHelperService->apiAuthenticationErrorResponse($namespace);
+        return $errorResource->response()->setStatusCode($errorResource->collection['status_code']);
+
+        // authorization error
+        $errorResource = $apiHelperService->apiAuthorizationErrorResponse($namespace);
+        return $errorResource->response()->setStatusCode($errorResource->collection['status_code']);
+    }
+}
+```
+
 ## License
 
 The MIT License (MIT)

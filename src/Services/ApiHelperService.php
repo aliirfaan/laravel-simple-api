@@ -105,4 +105,103 @@ class ApiHelperService
     {
         return $namespace . '-' .Str::random();
     }
+    
+    /**
+     * apiValidationErrorResponse
+     *
+     * Convenience function to return response in case of validation error, prefilled with errorName and errorMessage
+     * Calls $this->apiErrorResponse() with meaningful defaults
+     * 
+     * @param  array $errors
+     * @param  string $namespace
+     * @return ApiResponseCollection
+     */
+    public function apiValidationErrorResponse($errors, $namespace)
+    {
+        $errorName = 'VALIDATION_ERROR';
+        $errorMessage = 'Invalid data provided.';
+        $statusCode = Response::HTTP_BAD_REQUEST;
+
+        return $this->apiErrorResponse($errors, $namespace, $errorName, $errorMessage, $statusCode);
+    }
+
+    /**
+     * apiDatabaseErrorResponse
+     *
+     * Convenience function to return response in case of validation error, prefilled with errorName and errorMessage
+     * Calls $this->apiErrorResponse() with meaningful defaults
+     * 
+     * @param  string $namespace
+     * @return ApiResponseCollection
+     */
+    public function apiDatabaseErrorResponse($namespace)
+    {
+        $errorName = 'DATABASE_ERROR';
+        $errorMessage = 'Data store could not complete operation.';
+        $statusCode = Response::HTTP_INTERNAL_SERVER_ERROR;
+        $issue[] = $errorMessage;
+        $error['issue'] = $issue;
+
+        return $this->apiErrorResponse($error, $namespace, $errorName, $errorMessage, $statusCode);
+    }
+
+    /**
+     * apiUnknownErrorResponse
+     *
+     * Convenience function to return response in case of validation error, prefilled with errorName and errorMessage
+     * Calls $this->apiErrorResponse() with meaningful defaults
+     * 
+     * @param  string $namespace
+     * @return ApiResponseCollection
+     */
+    public function apiUnknownErrorResponse($namespace)
+    {
+        $errorName = 'UNKNOWN_ERROR';
+        $errorMessage = 'Processing could not be completed due to an error.';
+        $statusCode = Response::HTTP_INTERNAL_SERVER_ERROR;
+        $issue[] = $errorMessage;
+        $error['issue'] = $issue;
+
+        return $this->apiErrorResponse($error, $namespace, $errorName, $errorMessage, $statusCode);
+    }
+
+    /**
+     * apiAuthenticationErrorResponse
+     *
+     * Convenience function to return response in case of validation error, prefilled with errorName and errorMessage
+     * Calls $this->apiErrorResponse() with meaningful defaults
+     * 
+     * @param  string $namespace
+     * @return ApiResponseCollection
+     */
+    public function apiAuthenticationErrorResponse($namespace)
+    {
+        $errorName = 'AUTHENTICATION_ERROR';
+        $errorMessage = 'Could not validate against authentication service.';
+        $statusCode = Response::HTTP_UNAUTHORIZED;
+        $issue[] = $errorMessage;
+        $error['issue'] = $issue;
+
+        return $this->apiErrorResponse($error, $namespace, $errorName, $errorMessage, $statusCode);
+    }
+
+    /**
+     * apiAuthorizationErrorResponse
+     *
+     * Convenience function to return response in case of validation error, prefilled with errorName and errorMessage
+     * Calls $this->apiErrorResponse() with meaningful defaults
+     * 
+     * @param  string $namespace
+     * @return ApiResponseCollection
+     */
+    public function apiAuthorizationErrorResponse($namespace)
+    {
+        $errorName = 'AUTHORIZATION_ERROR';
+        $errorMessage = 'You are not authorized to do this operation.';
+        $statusCode = Response::HTTP_UNAUTHORIZED;
+        $issue[] = $errorMessage;
+        $error['issue'] = $issue;
+
+        return $this->apiErrorResponse($error, $namespace, $errorName, $errorMessage, $statusCode);
+    }
 }
