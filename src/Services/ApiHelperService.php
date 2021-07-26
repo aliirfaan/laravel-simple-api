@@ -128,7 +128,7 @@ class ApiHelperService
     /**
      * apiDatabaseErrorResponse
      *
-     * Convenience function to return response in case of validation error, prefilled with errorName and errorMessage
+     * Convenience function to return response in case of database error, prefilled with errorName and errorMessage
      * Calls $this->apiErrorResponse() with meaningful defaults
      * 
      * @param  string $namespace
@@ -148,7 +148,7 @@ class ApiHelperService
     /**
      * apiUnknownErrorResponse
      *
-     * Convenience function to return response in case of validation error, prefilled with errorName and errorMessage
+     * Convenience function to return response in case of unknown error, prefilled with errorName and errorMessage
      * Calls $this->apiErrorResponse() with meaningful defaults
      * 
      * @param  string $namespace
@@ -168,7 +168,7 @@ class ApiHelperService
     /**
      * apiAuthenticationErrorResponse
      *
-     * Convenience function to return response in case of validation error, prefilled with errorName and errorMessage
+     * Convenience function to return response in case of authentication error, prefilled with errorName and errorMessage
      * Calls $this->apiErrorResponse() with meaningful defaults
      * 
      * @param  string $namespace
@@ -188,7 +188,7 @@ class ApiHelperService
     /**
      * apiAuthorizationErrorResponse
      *
-     * Convenience function to return response in case of validation error, prefilled with errorName and errorMessage
+     * Convenience function to return response in case of authorization error, prefilled with errorName and errorMessage
      * Calls $this->apiErrorResponse() with meaningful defaults
      * 
      * @param  string $namespace
@@ -198,7 +198,7 @@ class ApiHelperService
     {
         $errorName = 'AUTHORIZATION_ERROR';
         $errorMessage = 'You are not authorized to do this operation.';
-        $statusCode = Response::HTTP_UNAUTHORIZED;
+        $statusCode = Response::HTTP_FORBIDDEN;
         $issue[] = $errorMessage;
         $error['issue'] = $issue;
 
