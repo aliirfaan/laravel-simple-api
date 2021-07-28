@@ -48,16 +48,12 @@ class ApiHelperService
                 if (isset($fieldsArray[$validationErrorKey])) {
                     $submittedValue = $fieldsArray[$validationErrorKey];
                 }
-        
-                $anErrorDetail = array(
-                    'field' => $validationErrorKey,
-                    'value' => $submittedValue,
-                );
-        
-                foreach ($validationErrorMessage as $anErrorMessage) {
-                    $anErrorDetail['issue'][] = $anErrorMessage;
-                }
 
+                $issues = null;
+                foreach ($validationErrorMessage as $anErrorMessage) {
+                    $issues[] = $anErrorMessage;
+                }
+                $anErrorDetail = $this->constructErrorDetails($issues, $validationErrorKey, $submittedValue);
                 $errorDetails[] = $anErrorDetail;
             }
         }
@@ -139,8 +135,9 @@ class ApiHelperService
         $errorName = 'DATABASE_ERROR';
         $errorMessage = 'Data store could not complete operation.';
         $statusCode = Response::HTTP_INTERNAL_SERVER_ERROR;
+
         $issue[] = $errorMessage;
-        $error['issue'] = $issue;
+        $error[] = $this->constructErrorDetails($issue);
 
         return $this->apiErrorResponse($error, $namespace, $errorName, $errorMessage, $statusCode);
     }
@@ -159,8 +156,9 @@ class ApiHelperService
         $errorName = 'UNKNOWN_ERROR';
         $errorMessage = 'Processing could not be completed due to an error.';
         $statusCode = Response::HTTP_INTERNAL_SERVER_ERROR;
+
         $issue[] = $errorMessage;
-        $error['issue'] = $issue;
+        $error[] = $this->constructErrorDetails($issue);
 
         return $this->apiErrorResponse($error, $namespace, $errorName, $errorMessage, $statusCode);
     }
@@ -179,8 +177,9 @@ class ApiHelperService
         $errorName = 'AUTHENTICATION_ERROR';
         $errorMessage = 'Could not validate against authentication service.';
         $statusCode = Response::HTTP_UNAUTHORIZED;
+
         $issue[] = $errorMessage;
-        $error['issue'] = $issue;
+        $error[] = $this->constructErrorDetails($issue);
 
         return $this->apiErrorResponse($error, $namespace, $errorName, $errorMessage, $statusCode);
     }
@@ -199,9 +198,29 @@ class ApiHelperService
         $errorName = 'AUTHORIZATION_ERROR';
         $errorMessage = 'You are not authorized to do this operation.';
         $statusCode = Response::HTTP_FORBIDDEN;
+
         $issue[] = $errorMessage;
-        $error['issue'] = $issue;
+        $error[] = $this->constructErrorDetails($issue);
 
         return $this->apiErrorResponse($error, $namespace, $errorName, $errorMessage, $statusCode);
+    }
+
+    /**
+     * constructErrorDetails
+     *
+     * @param  array $issues An array of messages for the error
+     * @param  string $field The name of the field
+     * @param  mixed $value The value of the field
+     * @param  array $links Link to information about error
+     * @return array
+     */
+    public function constructErrorDetails($issues, $field = null, $value = null, $links = null)
+    {
+        return [
+            'field' => $field,
+            'value' => $value,
+            'issue' => $issues,
+            'links' => $links
+        ];
     }
 }
