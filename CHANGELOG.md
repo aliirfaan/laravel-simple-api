@@ -3,6 +3,28 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com) and this project adheres to [Semantic Versioning](https://semver.org).
 
+## 3.1.0 - 2021-07-30
+
+### Added
+
+- class HypermediaRelation to generate HATEAOS links
+
+### Changed
+
+- Nothing
+
+### Deprecated
+
+- Nothing
+
+### Removed
+
+- nothing
+
+### Fixed
+
+- Nothing
+
 ## 3.0.0 - 2021-07-28
 
 ### Added
