@@ -33,12 +33,14 @@ class ApiHelperService
      * 
      * @param  array $fieldsArray fields submitted
      * @param  mixed $validationRules fields validation rules
+     * @param  array  $messages
+     * @param  array  $customAttributes
      * @return null | array of errors
      */
-    public function validateRequestFields($fieldsArray, $validationRules)
+    public function validateRequestFields($fieldsArray, array $validationRules, array $messages = [], array $customAttributes = [])
     {
         $errorDetails = null;
-        $validator = Validator::make($fieldsArray, $validationRules);
+        $validator = Validator::make($fieldsArray, $validationRules, $messages, $customAttributes);
 
         if ($validator->fails()) {
             $validationErrors = $validator->errors()->toArray();
