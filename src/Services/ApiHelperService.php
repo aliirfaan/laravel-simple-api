@@ -112,12 +112,15 @@ class ApiHelperService
      * 
      * @param  array $errors
      * @param  string $namespace
+     * @param  string $errorMessage
      * @return ApiResponseCollection
      */
-    public function apiValidationErrorResponse($errors, $namespace)
+    public function apiValidationErrorResponse($errors, $namespace, $errorMessage = null)
     {
         $errorName = 'VALIDATION_ERROR';
-        $errorMessage = 'Invalid data provided.';
+        if (is_null($errorMessage)) {
+            $errorMessage = 'Invalid data provided.';
+        }
         $statusCode = Response::HTTP_BAD_REQUEST;
 
         return $this->apiErrorResponse($errors, $namespace, $errorName, $errorMessage, $statusCode);
@@ -130,12 +133,15 @@ class ApiHelperService
      * Calls $this->apiErrorResponse() with meaningful defaults
      * 
      * @param  string $namespace
+     * @param  string $errorMessage
      * @return ApiResponseCollection
      */
-    public function apiDatabaseErrorResponse($namespace)
+    public function apiDatabaseErrorResponse($namespace, $errorMessage = null)
     {
         $errorName = 'DATABASE_ERROR';
-        $errorMessage = 'Data store could not complete operation.';
+        if (is_null($errorMessage)) {
+            $errorMessage = 'Data store could not complete operation.';
+        }
         $statusCode = Response::HTTP_INTERNAL_SERVER_ERROR;
 
         $issue[] = $errorMessage;
@@ -151,12 +157,15 @@ class ApiHelperService
      * Calls $this->apiErrorResponse() with meaningful defaults
      * 
      * @param  string $namespace
+     * @param  string $errorMessage
      * @return ApiResponseCollection
      */
-    public function apiUnknownErrorResponse($namespace)
+    public function apiUnknownErrorResponse($namespace, $errorMessage = null)
     {
         $errorName = 'UNKNOWN_ERROR';
-        $errorMessage = 'Processing could not be completed due to an error.';
+        if (is_null($errorMessage)) {
+            $errorMessage = 'Processing could not be completed due to an error.';
+        }
         $statusCode = Response::HTTP_INTERNAL_SERVER_ERROR;
 
         $issue[] = $errorMessage;
@@ -172,12 +181,15 @@ class ApiHelperService
      * Calls $this->apiErrorResponse() with meaningful defaults
      * 
      * @param  string $namespace
+     * @param  string $errorMessage
      * @return ApiResponseCollection
      */
-    public function apiAuthenticationErrorResponse($namespace)
+    public function apiAuthenticationErrorResponse($namespace, $errorMessage = null)
     {
         $errorName = 'AUTHENTICATION_ERROR';
-        $errorMessage = 'Could not validate against authentication service.';
+        if (is_null($errorMessage)) {
+            $errorMessage = 'Could not validate against authentication service.';
+        }
         $statusCode = Response::HTTP_UNAUTHORIZED;
 
         $issue[] = $errorMessage;
@@ -193,13 +205,40 @@ class ApiHelperService
      * Calls $this->apiErrorResponse() with meaningful defaults
      * 
      * @param  string $namespace
+     * @param  string $errorMessage
      * @return ApiResponseCollection
      */
-    public function apiAuthorizationErrorResponse($namespace)
+    public function apiAuthorizationErrorResponse($namespace, $errorMessage = null)
     {
         $errorName = 'AUTHORIZATION_ERROR';
-        $errorMessage = 'You are not authorized to do this operation.';
+        if (is_null($errorMessage)) {
+            $errorMessage = 'You are not authorized to do this operation.';
+        }
         $statusCode = Response::HTTP_FORBIDDEN;
+
+        $issue[] = $errorMessage;
+        $error[] = $this->constructErrorDetails($issue);
+
+        return $this->apiErrorResponse($error, $namespace, $errorName, $errorMessage, $statusCode);
+    }
+
+    /**
+     * apiNotFoundErrorResponse
+     *
+     * Convenience function to return response in case of authorization error, prefilled with errorName and errorMessage
+     * Calls $this->apiErrorResponse() with meaningful defaults
+     * 
+     * @param  string $namespace
+     * @param  string $errorMessage
+     * @return ApiResponseCollection
+     */
+    public function apiNotFoundErrorResponse($namespace, $errorMessage = null)
+    {
+        $errorName = 'OBJECT_NOT_FOUND_ERROR';
+        if (is_null($errorMessage)) {
+            $errorMessage = 'The record was nto found.';
+        }
+        $statusCode = Response::HTTP_NOT_FOUND;
 
         $issue[] = $errorMessage;
         $error[] = $this->constructErrorDetails($issue);

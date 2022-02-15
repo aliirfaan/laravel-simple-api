@@ -3,6 +3,32 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com) and this project adheres to [Semantic Versioning](https://semver.org).
 
+## 4.1.0 - 2022
+
+### Added
+
+- apiNotFoundErrorResponse()
+
+### Changed
+
+- apiValidationErrorResponse() - new parameter to change error message
+- apiDatabaseErrorResponse() - new parameter to change error message
+- apiUnknownErrorResponse() - new parameter to change error message
+- apiAuthenticationErrorResponse() - new parameter to change error message
+- apiAuthorizationErrorResponse() - new parameter to change error message
+
+### Deprecated
+
+- Nothing
+
+### Removed
+
+- nothing
+
+### Fixed
+
+- Nothing
+
 ## 4.0.0 - 2021-11-03
 
 ### Added
