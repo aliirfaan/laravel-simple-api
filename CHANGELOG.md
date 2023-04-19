@@ -3,6 +3,33 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com) and this project adheres to [Semantic Versioning](https://semver.org).
 
+## 5.0.0 - 2023-04-XX
+
+### Added
+
+- php >=7.0.0 constraint
+- localization
+- constructErrorDetail()
+- apiProcessingErrorResponse()
+
+### Changed
+
+- ApiResponseCollection use null coalescing operator
+- SimpleApiServiceProvider load translation in provider
+- validateRequestFields(), apiErrorResponse(), apiValidationErrorResponse(), apiDatabaseErrorResponse(), apiUnknownErrorResponse(), apiAuthenticationErrorResponse(), apiAuthorizationErrorResponse(), apiNotFoundErrorResponse()
+
+### Deprecated
+
+- Nothing
+
+### Removed
+
+- constructErrorDetails()
+
+### Fixed
+
+- Nothing
+
 ## 4.1.0 - 2022-11-22
 
 ### Added

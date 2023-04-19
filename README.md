@@ -35,12 +35,12 @@ class ApiResponseCollection extends ResourceCollection
     {
         $items = $this->collection->all();
         return [
-            'success' => (\array_key_exists('success', $items)) ? $items['success'] : false,
-            'result' => (\array_key_exists('result', $items)) ? $items['result'] : null,
-            'errors' => (\array_key_exists('errors', $items)) ? $items['errors'] : null,
-            'links' => (\array_key_exists('links', $items)) ? $items['links'] : null,
-            'message' => (\array_key_exists('message', $items)) ? $items['message'] : null,
-            'extra' => (\array_key_exists('extra', $items)) ? $items['extra'] : null,
+            'success' => $items['success'] ?? false,
+            'result' => $items['result'] ?? null,
+            'errors' => $items['errors'] ?? null,
+            'links' => $items['links'] ?? null,
+            'message' => $items['message'] ?? null,
+            'extra' => $items['extra'] ?? null
         ];
     }
 }
@@ -55,11 +55,13 @@ The error response format used is inspired by [paypal api guide](https://github.
 * Get a generic response format for you API
 * Response formatting for API errors
 * API request validation
+* All messages are localized
 
 ## Requirements
 
 * [Composer](https://getcomposer.org/)
 * [Laravel](http://laravel.com/)
+* PHP >= 7.0.0
 
 ## Installation
 
@@ -116,9 +118,18 @@ class TestController extends Controller
         if (!is_null($validationResult)) {
             // output error response
             $namespace = 'user';
-            $errorName = 'VALIDATION_ERROR';
-            $errorMessage = 'Invalid data provided';
-            $validationErrorResponse = $apiHelperService->apiErrorResponse($validationResult, $namespace, $errorName, $errorMessage);
+            $validationErrorResponse = $apiHelperService->apiValidationErrorResponse($namespace, $validationResult);
+            return $validationErrorResponse->response()->setStatusCode(Response::HTTP_BAD_REQUEST);
+        }
+
+        // use your own message key
+        if (!is_null($validationResult)) {
+            // output error response
+            $namespace = 'user';
+            $errorTranslationKey = 'auth.failed';
+            $errorTranslationParameters = ['code' => '15645'];
+
+            $validationErrorResponse = $apiHelperService->apiValidationErrorResponse($namespace, $validationResult, $errorTranslationKey, $errorTranslationParameters);
             return $validationErrorResponse->response()->setStatusCode(Response::HTTP_BAD_REQUEST);
         }
 
@@ -151,18 +162,6 @@ class TestController extends Controller
     public function testApiHelper(Request $request, ApiHelperService $apiHelperService)
     {
         $namespace = $this->customerApiCommandModel->namespace;
-        // get your api request fields
-        $requestArray = $request->json()->all();
-        // get your validatin rules
-        $validationRules = User::$createRules;
-
-        // validation errors
-        $validationRules = $this->customerApiCommandModel->registerValidationRules();
-        $validationResult = $apiHelperService->validateRequestFields($requestArray, $validationRules);
-        if (!is_null($validationResult)) {
-            $errorResource = $apiHelperService->apiValidationErrorResponse($validationResult, $namespace);
-            return $errorResource->response()->setStatusCode($errorResource->collection['status_code']);
-        }
 
         // database error
         $errorResource = $apiHelperService->apiDatabaseErrorResponse($namespace);
@@ -179,8 +178,86 @@ class TestController extends Controller
         // authorization error
         $errorResource = $apiHelperService->apiAuthorizationErrorResponse($namespace);
         return $errorResource->response()->setStatusCode($errorResource->collection['status_code']);
+
+        // processing error with issue
+        $issues = ['This is an issue', 'There is another issue'];
+        $errorDetail = [
+            'issues' => $issues,
+            'value' => 'fsdfd'
+        ];
+        $errorResource = $apiHelperService->apiProcessingErrorResponse($namespace, $errorDetail);
+        return $errorResource->response()->setStatusCode($errorResource->collection['status_code']);
     }
 }
+```
+## Example VALIDATION_ERROR responses
+```javascript
+{
+    "data": {
+        "success": false,
+        "result": null,
+        "errors": [
+            {
+                "name": "VALIDATION_ERROR",
+                "message": "Invalid data provided",
+                "debug_id": "test-GRCrDMYlbzNqXlRX",
+                "details": [
+                    {
+                        "field": "is_citizen",
+                        "value": null,
+                        "issues": [
+                            "The is citizen field is required."
+                        ],
+                        "links": null
+                    },
+                    {
+                        "field": "mobile_number",
+                        "value": null,
+                        "issues": [
+                            "The mobile number field is required."
+                        ],
+                        "links": null
+                    }
+                ]
+            }
+        ],
+        "links": null,
+        "message": "Processing could not be completed due to an error.",
+        "extra": null
+    }
+}
+```
+
+## Example UNKNOWN_ERROR responses
+```javascript
+{
+    "data": {
+        "success": false,
+        "result": null,
+        "errors": [
+            {
+                "name": "UNKNOWN_ERROR",
+                "message": "Processing could not be completed due to an unknown error.",
+                "debug_id": "test-k4PjPxwZ9aVt4Xqs",
+                "details": [
+                    {
+                        "field": null,
+                        "value": "a value",
+                        "issues": [
+                            "This is an issue",
+                            "There is another issue"
+                        ],
+                        "links": null
+                    }
+                ]
+            }
+        ],
+        "links": null,
+        "message": "Processing could not be completed due to an error.",
+        "extra": null
+    }
+}
+
 ```
 
 ## License

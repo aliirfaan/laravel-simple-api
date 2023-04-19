@@ -27,12 +27,12 @@ class ApiResponseCollection extends ResourceCollection
     {
         $items = $this->collection->all();
         return [
-            'success' => (\array_key_exists('success', $items)) ? $items['success'] : false,
-            'result' => (\array_key_exists('result', $items)) ? $items['result'] : null,
-            'errors' => (\array_key_exists('errors', $items)) ? $items['errors'] : null,
-            'links' => (\array_key_exists('links', $items)) ? $items['links'] : null,
-            'message' => (\array_key_exists('message', $items)) ? $items['message'] : null,
-            'extra' => (\array_key_exists('extra', $items)) ? $items['extra'] : null,
+            'success' => $items['success'] ?? false,
+            'result' => $items['result'] ?? null,
+            'errors' => $items['errors'] ?? null,
+            'links' => $items['links'] ?? null,
+            'message' => $items['message'] ?? null,
+            'extra' => $items['extra'] ?? null
         ];
     }
 }

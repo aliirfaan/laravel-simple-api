@@ -24,6 +24,7 @@ class SimpleApiServiceProvider extends \Illuminate\Support\ServiceProvider
      * @return void
      */
     public function boot()
-    {
+    {   
+        $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'laravel-simple-api');
     }
 }
