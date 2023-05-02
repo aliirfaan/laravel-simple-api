@@ -3,6 +3,29 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com) and this project adheres to [Semantic Versioning](https://semver.org).
 
+## 5.0.1 - 2023-05-02
+
+### Added
+
+- Nothing
+
+### Changed
+
+- apiDatabaseErrorResponse(), apiUnknownErrorResponse(), apiAuthenticationErrorResponse(), apiAuthorizationErrorResponse(), apiNotFoundErrorResponse() - change message key
+- resources\lang\en\error_catalogue\messages.php - change unknown_error key text
+
+### Deprecated
+
+- Nothing
+
+### Removed
+
+- Nothing
+
+### Fixed
+
+- Nothing
+
 ## 5.0.0 - 2023-04-20
 
 ### Added

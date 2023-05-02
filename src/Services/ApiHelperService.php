@@ -227,7 +227,7 @@ class ApiHelperService
      * @param  array $generalErrorTranslationParameters translation parameters to be replaced in translation message for general error message
      * @return ApiResponseCollection
      */
-    public function apiAuthenticationErrorResponse($namespace, $errorDetail = [], $errorTranslationKey = null, $errorTranslationParameters = [], $generalErrorTranslationKey = 'laravel-simple-api::error_catalogue/messages.authentication_error', $generalErrorTranslationParameters = [])
+    public function apiAuthenticationErrorResponse($namespace, $errorDetail = [], $errorTranslationKey = null, $errorTranslationParameters = [], $generalErrorTranslationKey = 'laravel-simple-api::error_catalogue/messages.processing_error', $generalErrorTranslationParameters = [])
     {
         $errorName = 'AUTHENTICATION_ERROR';
         if (is_null($errorTranslationKey)) {
@@ -262,7 +262,7 @@ class ApiHelperService
      * @param  array $generalErrorTranslationParameters translation parameters to be replaced in translation message for general error message
      * @return ApiResponseCollection
      */
-    public function apiAuthorizationErrorResponse($namespace, $errorDetail = [], $errorTranslationKey = null, $errorTranslationParameters = [], $generalErrorTranslationKey = 'laravel-simple-api::error_catalogue/messages.authorization_error', $generalErrorTranslationParameters = [])
+    public function apiAuthorizationErrorResponse($namespace, $errorDetail = [], $errorTranslationKey = null, $errorTranslationParameters = [], $generalErrorTranslationKey = 'laravel-simple-api::error_catalogue/messages.processing_error', $generalErrorTranslationParameters = [])
     {
         $errorName = 'AUTHORIZATION_ERROR';
         if (is_null($errorTranslationKey)) {
@@ -297,7 +297,7 @@ class ApiHelperService
      * @param  array $generalErrorTranslationParameters translation parameters to be replaced in translation message for general error message
      * @return ApiResponseCollection
      */
-    public function apiNotFoundErrorResponse($namespace, $errorDetail = [], $errorTranslationKey = null, $errorTranslationParameters = [], $generalErrorTranslationKey = 'laravel-simple-api::error_catalogue/messages.record_not_found', $generalErrorTranslationParameters = [])
+    public function apiNotFoundErrorResponse($namespace, $errorDetail = [], $errorTranslationKey = null, $errorTranslationParameters = [], $generalErrorTranslationKey = 'laravel-simple-api::error_catalogue/messages.processing_error', $generalErrorTranslationParameters = [])
     {
         $errorName = 'OBJECT_NOT_FOUND_ERROR';
         if (is_null($errorTranslationKey)) {
