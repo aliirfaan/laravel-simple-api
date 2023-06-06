@@ -3,6 +3,29 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com) and this project adheres to [Semantic Versioning](https://semver.org).
 
+## 5.1.0 - 2023-06-06
+
+### Added
+
+- apiTooManyRequestsErrorResponse() convenience function for too many requests errors
+- resources\lang\en\error_catalogue\messages.php - too many requests key
+
+### Changed
+
+- Nothing
+
+### Deprecated
+
+- Nothing
+
+### Removed
+
+- Nothing
+
+### Fixed
+
+- Nothing
+
 ## 5.0.1 - 2023-05-02
 
 ### Added

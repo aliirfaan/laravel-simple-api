@@ -353,6 +353,48 @@ class ApiHelperService
         return $this->apiErrorResponse($errors, $generalErrorTranslationKey, $generalErrorTranslationParameters, $statusCode);
     }
 
+    /**
+     * apiTooManyRequestsErrorResponse
+     *
+     * Convenience function to return response in case of too many requests/attemtps error, prefilled with errorName and errorMessage
+     * Calls $this->apiErrorResponse() with meaningful defaults
+     * 
+     * @param  string $namespace
+     * @param  array $errorDetail detail of the error
+     * @param  string $errorTranslationKey translation key in language file
+     * @param  array $errorTranslationParameters translation parameters to be replaced in translation message
+     * @param  string $generalErrorTranslationKey translation key in language file for general error message
+     * @param  array $generalErrorTranslationParameters translation parameters to be replaced in translation message for general error message
+     * @return ApiResponseCollection
+     */
+    public function apiTooManyRequestsErrorResponse($namespace, $errorDetail = [], $errorTranslationKey = null, $errorTranslationParameters = [], $generalErrorTranslationKey = 'laravel-simple-api::error_catalogue/messages.processing_error', $generalErrorTranslationParameters = [])
+    {
+        $errorName = 'TOO_MANY_REQUESTS';
+        if (is_null($errorTranslationKey)) {
+            $errorTranslationKey = 'laravel-simple-api::error_catalogue/messages.too_many_requests_error';
+        }
+        $errorMessage = __($errorTranslationKey, $errorTranslationParameters);
+
+        $details[] = $this->constructErrorDetail($errorDetail);
+        $errors[] = [
+            'name' => $errorName,
+            'message' => $errorMessage,
+            'debug_id' => $this->generateDebugId($namespace),
+            'details' => $details
+        ];
+
+        $statusCode = Response::HTTP_TOO_MANY_REQUESTS;
+
+        return $this->apiErrorResponse($errors, $generalErrorTranslationKey, $generalErrorTranslationParameters, $statusCode);
+    }
+    
+    /**
+     * Method constructErrorDetail
+     *
+     * @param $errorDetail $errorDetail [explicite description]
+     *
+     * @return array
+     */
     public function constructErrorDetail($errorDetail)
     {
         return [
