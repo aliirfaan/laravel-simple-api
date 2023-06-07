@@ -134,6 +134,10 @@ class ApiHelperService
             $formattedDetails[] = $this->constructErrorDetail($anErrorDetail);
         }
 
+        if (empty($formattedDetails)) {
+            $formattedDetails[] = $this->constructErrorDetail([]);
+        }
+
         $errors[] = [
             'name' => $errorName,
             'message' => $errorMessage,
@@ -171,6 +175,10 @@ class ApiHelperService
         $formattedDetails = [];
         foreach ($errorDetails as $anErrorDetail) {
             $formattedDetails[] = $this->constructErrorDetail($anErrorDetail);
+        }
+
+        if (empty($formattedDetails)) {
+            $formattedDetails[] = $this->constructErrorDetail([]);
         }
 
         $errors[] = [
@@ -212,6 +220,10 @@ class ApiHelperService
             $formattedDetails[] = $this->constructErrorDetail($anErrorDetail);
         }
 
+        if (empty($formattedDetails)) {
+            $formattedDetails[] = $this->constructErrorDetail([]);
+        }
+
         $errors[] = [
             'name' => $errorName,
             'message' => $errorMessage,
@@ -249,6 +261,10 @@ class ApiHelperService
         $formattedDetails = [];
         foreach ($errorDetails as $anErrorDetail) {
             $formattedDetails[] = $this->constructErrorDetail($anErrorDetail);
+        }
+
+        if (empty($formattedDetails)) {
+            $formattedDetails[] = $this->constructErrorDetail([]);
         }
 
         $errors[] = [
@@ -290,6 +306,10 @@ class ApiHelperService
             $formattedDetails[] = $this->constructErrorDetail($anErrorDetail);
         }
 
+        if (empty($formattedDetails)) {
+            $formattedDetails[] = $this->constructErrorDetail([]);
+        }
+
         $errors[] = [
             'name' => $errorName,
             'message' => $errorMessage,
@@ -327,6 +347,10 @@ class ApiHelperService
         $formattedDetails = [];
         foreach ($errorDetails as $anErrorDetail) {
             $formattedDetails[] = $this->constructErrorDetail($anErrorDetail);
+        }
+
+        if (empty($formattedDetails)) {
+            $formattedDetails[] = $this->constructErrorDetail([]);
         }
 
         $errors[] = [
@@ -368,6 +392,10 @@ class ApiHelperService
             $formattedDetails[] = $this->constructErrorDetail($anErrorDetail);
         }
 
+        if (empty($formattedDetails)) {
+            $formattedDetails[] = $this->constructErrorDetail([]);
+        }
+
         $errors[] = [
             'name' => $errorName,
             'message' => $errorMessage,
@@ -405,6 +433,10 @@ class ApiHelperService
         $formattedDetails = [];
         foreach ($errorDetails as $anErrorDetail) {
             $formattedDetails[] = $this->constructErrorDetail($anErrorDetail);
+        }
+
+        if (empty($formattedDetails)) {
+            $formattedDetails[] = $this->constructErrorDetail([]);
         }
 
         $errors[] = [
