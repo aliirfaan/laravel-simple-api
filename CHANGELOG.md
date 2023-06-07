@@ -3,6 +3,28 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com) and this project adheres to [Semantic Versioning](https://semver.org).
 
+## 6.1.1 - 2023-06-07
+
+### Added
+
+- Nothing
+
+### Changed
+
+- Nothing
+
+### Deprecated
+
+- Nothing
+
+### Removed
+
+- Nothing
+
+### Fixed
+
+- README.md
+
 ## 6.1.0 - 2023-06-07
 
 ### Added

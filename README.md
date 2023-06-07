@@ -181,11 +181,10 @@ class TestController extends Controller
 
         // processing error with issue
         $issues = ['This is an issue', 'There is another issue'];
-        $errorDetail = [
-            'issues' => $issues,
-            'value' => 'fsdfd'
+        $errorDetails[] = [
+            'issues' => $issues
         ];
-        $errorResource = $apiHelperService->apiProcessingErrorResponse($namespace, $errorDetail);
+        $errorResource = $apiHelperService->apiProcessingErrorResponse($namespace, $errorDetails);
         return $errorResource->response()->setStatusCode($errorResource->collection['status_code']);
     }
 }
