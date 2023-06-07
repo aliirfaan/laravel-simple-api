@@ -3,6 +3,29 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com) and this project adheres to [Semantic Versioning](https://semver.org).
 
+## 6.0.0 - 2023-06-07
+
+### Added
+
+- Nothing
+
+### Changed
+
+- validateRequestFields()
+- all convenience functions can now show can show many error details instead of single detail
+
+### Deprecated
+
+- Nothing
+
+### Removed
+
+- Nothing
+
+### Fixed
+
+- Nothing
+
 ## 5.1.0 - 2023-06-06
 
 ### Added
