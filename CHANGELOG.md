@@ -3,6 +3,27 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com) and this project adheres to [Semantic Versioning](https://semver.org).
 
+## 7.0.0 - 2023-06-10
+
+### Added
+
+- Nothing
+
+### Changed
+
+- all convenience functions have an additional message parameter that take precedence on message translation
+
+### Deprecated
+
+- Nothing
+
+### Removed
+
+- Nothing
+
+### Fixed
+
+- README.md
 ## 6.1.1 - 2023-06-07
 
 ### Added

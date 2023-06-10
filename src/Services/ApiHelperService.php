@@ -115,19 +115,22 @@ class ApiHelperService
      * 
      * @param string $namespace
      * @param array $errorDetails an array of error details. See @constructErrorDetail($errorDetail) for error detail format
-     * @param string $errorTranslationKey translation key in language file
+     * @param string $errorMessage a message string that takes precedence on errorTranslationKey and $errorTranslationParameters
+     * @param string errorTranslationKey translation key in language file
      * @param array $errorTranslationParameters translation parameters to be replaced in translation message
      * @param string $generalErrorTranslationKey translation key in language file for general error message
      * @param array $generalErrorTranslationParameters translation parameters to be replaced in translation message for general error message
      * @return ApiResponseCollection
      */
-    public function apiValidationErrorResponse($namespace, $errorDetails = [], $errorTranslationKey = null, $errorTranslationParameters = [], $generalErrorTranslationKey = 'laravel-simple-api::error_catalogue/messages.processing_error', $generalErrorTranslationParameters = [])
+    public function apiValidationErrorResponse($namespace, $errorDetails = [], $errorMessage = null, $errorTranslationKey = null, $errorTranslationParameters = [], $generalErrorTranslationKey = 'laravel-simple-api::error_catalogue/messages.processing_error', $generalErrorTranslationParameters = [])
     {
         $errorName = 'VALIDATION_ERROR';
-        if (is_null($errorTranslationKey)) {
-            $errorTranslationKey = 'laravel-simple-api::error_catalogue/messages.validation_error';
+        if (is_null($errorMessage)) {
+            if (is_null($errorTranslationKey)) {
+                $errorTranslationKey = 'laravel-simple-api::error_catalogue/messages.validation_error';
+            }
+            $errorMessage = __($errorTranslationKey, $errorTranslationParameters);
         }
-        $errorMessage = __($errorTranslationKey, $errorTranslationParameters);
 
         $formattedDetails = [];
         foreach ($errorDetails as $anErrorDetail) {
@@ -158,19 +161,22 @@ class ApiHelperService
      * 
      * @param  string $namespace
      * @param array $errorDetails an array of error details.
+     * @param string $errorMessage a message string that takes precedence on errorTranslationKey and $errorTranslationParameters
      * @param  string $errorTranslationKey translation key in language file
      * @param  array $errorTranslationParameters translation parameters to be replaced in translation message
      * @param  string $generalErrorTranslationKey translation key in language file for general error message
      * @param  array $generalErrorTranslationParameters translation parameters to be replaced in translation message for general error message
      * @return ApiResponseCollection
      */
-    public function apiDatabaseErrorResponse($namespace, $errorDetails = [], $errorTranslationKey = null, $errorTranslationParameters = [], $generalErrorTranslationKey = 'laravel-simple-api::error_catalogue/messages.processing_error', $generalErrorTranslationParameters = [])
+    public function apiDatabaseErrorResponse($namespace, $errorDetails = [], $errorMessage = null, $errorTranslationKey = null, $errorTranslationParameters = [], $generalErrorTranslationKey = 'laravel-simple-api::error_catalogue/messages.processing_error', $generalErrorTranslationParameters = [])
     {
         $errorName = 'DATABASE_ERROR';
-        if (is_null($errorTranslationKey)) {
-            $errorTranslationKey = 'laravel-simple-api::error_catalogue/messages.database_error';
+        if (is_null($errorMessage)) {
+            if (is_null($errorTranslationKey)) {
+                $errorTranslationKey = 'laravel-simple-api::error_catalogue/messages.database_error';
+            }
+            $errorMessage = __($errorTranslationKey, $errorTranslationParameters);
         }
-        $errorMessage = __($errorTranslationKey, $errorTranslationParameters);
 
         $formattedDetails = [];
         foreach ($errorDetails as $anErrorDetail) {
@@ -201,19 +207,22 @@ class ApiHelperService
      * 
      * @param  string $namespace
      * @param array $errorDetails an array of error details.
+     * @param string $errorMessage a message string that takes precedence on errorTranslationKey and $errorTranslationParameters
      * @param  string $errorTranslationKey translation key in language file
      * @param  array $errorTranslationParameters translation parameters to be replaced in translation message
      * @param  string $generalErrorTranslationKey translation key in language file for general error message
      * @param  array $generalErrorTranslationParameters translation parameters to be replaced in translation message for general error message
      * @return ApiResponseCollection
      */
-    public function apiUnknownErrorResponse($namespace, $errorDetails = [], $errorTranslationKey = null, $errorTranslationParameters = [], $generalErrorTranslationKey = 'laravel-simple-api::error_catalogue/messages.processing_error', $generalErrorTranslationParameters = [])
+    public function apiUnknownErrorResponse($namespace, $errorDetails = [], $errorMessage = null, $errorTranslationKey = null, $errorTranslationParameters = [], $generalErrorTranslationKey = 'laravel-simple-api::error_catalogue/messages.processing_error', $generalErrorTranslationParameters = [])
     {
         $errorName = 'UNKNOWN_ERROR';
-        if (is_null($errorTranslationKey)) {
-            $errorTranslationKey = 'laravel-simple-api::error_catalogue/messages.unknown_error';
+        if (is_null($errorMessage)) {
+            if (is_null($errorTranslationKey)) {
+                $errorTranslationKey = 'laravel-simple-api::error_catalogue/messages.unknown_error';
+            }
+            $errorMessage = __($errorTranslationKey, $errorTranslationParameters);
         }
-        $errorMessage = __($errorTranslationKey, $errorTranslationParameters);
 
         $formattedDetails = [];
         foreach ($errorDetails as $anErrorDetail) {
@@ -244,19 +253,22 @@ class ApiHelperService
      * 
      * @param  string $namespace
      * @param array $errorDetails an array of error details.
+     * @param string $errorMessage a message string that takes precedence on errorTranslationKey and $errorTranslationParameters
      * @param  string $errorTranslationKey translation key in language file
      * @param  array $errorTranslationParameters translation parameters to be replaced in translation message
      * @param  string $generalErrorTranslationKey translation key in language file for general error message
      * @param  array $generalErrorTranslationParameters translation parameters to be replaced in translation message for general error message
      * @return ApiResponseCollection
      */
-    public function apiAuthenticationErrorResponse($namespace, $errorDetails = [], $errorTranslationKey = null, $errorTranslationParameters = [], $generalErrorTranslationKey = 'laravel-simple-api::error_catalogue/messages.processing_error', $generalErrorTranslationParameters = [])
+    public function apiAuthenticationErrorResponse($namespace, $errorDetails = [], $errorMessage = null, $errorTranslationKey = null, $errorTranslationParameters = [], $generalErrorTranslationKey = 'laravel-simple-api::error_catalogue/messages.processing_error', $generalErrorTranslationParameters = [])
     {
         $errorName = 'AUTHENTICATION_ERROR';
-        if (is_null($errorTranslationKey)) {
-            $errorTranslationKey = 'laravel-simple-api::error_catalogue/messages.authentication_error';
+        if (is_null($errorMessage)) {
+            if (is_null($errorTranslationKey)) {
+                $errorTranslationKey = 'laravel-simple-api::error_catalogue/messages.authentication_error';
+            }
+            $errorMessage = __($errorTranslationKey, $errorTranslationParameters);
         }
-        $errorMessage = __($errorTranslationKey, $errorTranslationParameters);
 
         $formattedDetails = [];
         foreach ($errorDetails as $anErrorDetail) {
@@ -287,19 +299,22 @@ class ApiHelperService
      * 
      * @param  string $namespace
      * @param array $errorDetails an array of error details.
+     * @param string $errorMessage a message string that takes precedence on errorTranslationKey and $errorTranslationParameters
      * @param  string $errorTranslationKey translation key in language file
      * @param  array $errorTranslationParameters translation parameters to be replaced in translation message
      * @param  string $generalErrorTranslationKey translation key in language file for general error message
      * @param  array $generalErrorTranslationParameters translation parameters to be replaced in translation message for general error message
      * @return ApiResponseCollection
      */
-    public function apiAuthorizationErrorResponse($namespace, $errorDetails = [], $errorTranslationKey = null, $errorTranslationParameters = [], $generalErrorTranslationKey = 'laravel-simple-api::error_catalogue/messages.processing_error', $generalErrorTranslationParameters = [])
+    public function apiAuthorizationErrorResponse($namespace, $errorDetails = [], $errorMessage = null, $errorTranslationKey = null, $errorTranslationParameters = [], $generalErrorTranslationKey = 'laravel-simple-api::error_catalogue/messages.processing_error', $generalErrorTranslationParameters = [])
     {
         $errorName = 'AUTHORIZATION_ERROR';
-        if (is_null($errorTranslationKey)) {
-            $errorTranslationKey = 'laravel-simple-api::error_catalogue/messages.authorization_error';
+        if (is_null($errorMessage)) {
+            if (is_null($errorTranslationKey)) {
+                $errorTranslationKey = 'laravel-simple-api::error_catalogue/messages.authorization_error';
+            }
+            $errorMessage = __($errorTranslationKey, $errorTranslationParameters);
         }
-        $errorMessage = __($errorTranslationKey, $errorTranslationParameters);
 
         $formattedDetails = [];
         foreach ($errorDetails as $anErrorDetail) {
@@ -330,19 +345,22 @@ class ApiHelperService
      * 
      * @param  string $namespace
      * @param array $errorDetails an array of error details.
+     * @param string $errorMessage a message string that takes precedence on errorTranslationKey and $errorTranslationParameters
      * @param  string $errorTranslationKey translation key in language file
      * @param  array $errorTranslationParameters translation parameters to be replaced in translation message
      * @param  string $generalErrorTranslationKey translation key in language file for general error message
      * @param  array $generalErrorTranslationParameters translation parameters to be replaced in translation message for general error message
      * @return ApiResponseCollection
      */
-    public function apiNotFoundErrorResponse($namespace, $errorDetails = [], $errorTranslationKey = null, $errorTranslationParameters = [], $generalErrorTranslationKey = 'laravel-simple-api::error_catalogue/messages.processing_error', $generalErrorTranslationParameters = [])
+    public function apiNotFoundErrorResponse($namespace, $errorDetails = [], $errorMessage = null, $errorTranslationKey = null, $errorTranslationParameters = [], $generalErrorTranslationKey = 'laravel-simple-api::error_catalogue/messages.processing_error', $generalErrorTranslationParameters = [])
     {
         $errorName = 'OBJECT_NOT_FOUND_ERROR';
-        if (is_null($errorTranslationKey)) {
-            $errorTranslationKey = 'laravel-simple-api::error_catalogue/messages.record_not_found';
+        if (is_null($errorMessage)) {
+            if (is_null($errorTranslationKey)) {
+                $errorTranslationKey = 'laravel-simple-api::error_catalogue/messages.record_not_found';
+            }
+            $errorMessage = __($errorTranslationKey, $errorTranslationParameters);
         }
-        $errorMessage = __($errorTranslationKey, $errorTranslationParameters);
 
         $formattedDetails = [];
         foreach ($errorDetails as $anErrorDetail) {
@@ -373,19 +391,22 @@ class ApiHelperService
      * 
      * @param  string $namespace
      * @param array $errorDetails an array of error details.
+     * @param string $errorMessage a message string that takes precedence on errorTranslationKey and $errorTranslationParameters
      * @param  string $errorTranslationKey translation key in language file
      * @param  array $errorTranslationParameters translation parameters to be replaced in translation message
      * @param  string $generalErrorTranslationKey translation key in language file for general error message
      * @param  array $generalErrorTranslationParameters translation parameters to be replaced in translation message for general error message
      * @return ApiResponseCollection
      */
-    public function apiProcessingErrorResponse($namespace, $errorDetails = [], $errorTranslationKey = null, $errorTranslationParameters = [], $generalErrorTranslationKey = 'laravel-simple-api::error_catalogue/messages.processing_error', $generalErrorTranslationParameters = [])
+    public function apiProcessingErrorResponse($namespace, $errorDetails = [], $errorMessage = null, $errorTranslationKey = null, $errorTranslationParameters = [], $generalErrorTranslationKey = 'laravel-simple-api::error_catalogue/messages.processing_error', $generalErrorTranslationParameters = [])
     {
         $errorName = 'PROCESSING_ERROR';
-        if (is_null($errorTranslationKey)) {
-            $errorTranslationKey = 'laravel-simple-api::error_catalogue/messages.processing_error';
+        if (is_null($errorMessage)) {
+            if (is_null($errorTranslationKey)) {
+                $errorTranslationKey = 'laravel-simple-api::error_catalogue/messages.processing_error';
+            }
+            $errorMessage = __($errorTranslationKey, $errorTranslationParameters);
         }
-        $errorMessage = __($errorTranslationKey, $errorTranslationParameters);
 
         $formattedDetails = [];
         foreach ($errorDetails as $anErrorDetail) {
@@ -416,19 +437,22 @@ class ApiHelperService
      * 
      * @param  string $namespace
      * @param array $errorDetails an array of error details.
+     * @param string $errorMessage a message string that takes precedence on errorTranslationKey and $errorTranslationParameters
      * @param  string $errorTranslationKey translation key in language file
      * @param  array $errorTranslationParameters translation parameters to be replaced in translation message
      * @param  string $generalErrorTranslationKey translation key in language file for general error message
      * @param  array $generalErrorTranslationParameters translation parameters to be replaced in translation message for general error message
      * @return ApiResponseCollection
      */
-    public function apiTooManyRequestsErrorResponse($namespace, $errorDetails = [], $errorTranslationKey = null, $errorTranslationParameters = [], $generalErrorTranslationKey = 'laravel-simple-api::error_catalogue/messages.processing_error', $generalErrorTranslationParameters = [])
+    public function apiTooManyRequestsErrorResponse($namespace, $errorDetails = [], $errorMessage = null, $errorTranslationKey = null, $errorTranslationParameters = [], $generalErrorTranslationKey = 'laravel-simple-api::error_catalogue/messages.processing_error', $generalErrorTranslationParameters = [])
     {
         $errorName = 'TOO_MANY_REQUESTS';
-        if (is_null($errorTranslationKey)) {
-            $errorTranslationKey = 'laravel-simple-api::error_catalogue/messages.too_many_requests_error';
+        if (is_null($errorMessage)) {
+            if (is_null($errorTranslationKey)) {
+                $errorTranslationKey = 'laravel-simple-api::error_catalogue/messages.too_many_requests_error';
+            }
+            $errorMessage = __($errorTranslationKey, $errorTranslationParameters);
         }
-        $errorMessage = __($errorTranslationKey, $errorTranslationParameters);
 
         $formattedDetails = [];
         foreach ($errorDetails as $anErrorDetail) {
