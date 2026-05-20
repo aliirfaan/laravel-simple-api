@@ -12,9 +12,9 @@ class ApiHelperService
     /**
      * responseArrayFormat
      *
-     * @var $responseArrayFormat An array format that maps to API response format
+     * @var array $responseArrayFormat An array format that maps to API response format
      */
-    public $responseArrayFormat = [
+    public array $responseArrayFormat = [
         'success' => false,
         'result' => null,
         'errors' => null,
@@ -490,5 +490,53 @@ class ApiHelperService
             'issues' => $errorDetail['issues'] ?? null,
             'links' => $errorDetail['links'] ?? null
         ];
+    }
+
+    /**
+     * apiCustomErrorResponse
+     *
+     * Returns a formatted api response for custom errors
+     * 
+     * @param  string $namespace
+     * @param array $data an array of data.
+     * @param string $errorName the name of the error.
+     * @param int $statusCode the status code of the response.
+     * @return ApiResponseCollection
+     */
+    public function apiCustomErrorResponse($namespace, $data = [], $errorName = null, $statusCode = Response::HTTP_BAD_REQUEST)
+    {
+        if (is_null($errorName)) {
+            $errorName = 'CUSTOM_ERROR';
+        }
+
+        $customData = $this->responseArrayFormat;
+        $customData['status_code'] = $statusCode;
+
+        $errorTranslationKey = 'laravel-simple-api::error_catalogue/messages.processing_error';
+        $errorMessage = __($errorTranslationKey);
+        $customData['message'] = $errorMessage;
+
+        $customData['extra'] = $data['extra'] ?? null;
+        $errorDetails = $data['issues'] ?? [];
+        $customData['links'] = $data['links'] ?? null;
+
+        $formattedDetails = [];
+        foreach ($errorDetails as $anErrorDetail) {
+            $formattedDetails[] = $this->constructErrorDetail($anErrorDetail);
+        }
+
+        if (empty($formattedDetails)) {
+            $formattedDetails[] = $this->constructErrorDetail([]);
+        }
+
+        $errors[] = [
+            'name' => $errorName,
+            'message' => $data['message'] ?? null,
+            'debug_id' => $this->generateDebugId($namespace),
+            'details' => $formattedDetails
+        ];
+        $customData['errors'] = $errors;
+
+        return new ApiResponseCollection($customData);
     }
 }

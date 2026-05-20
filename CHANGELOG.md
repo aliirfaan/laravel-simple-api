@@ -3,6 +3,28 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com) and this project adheres to [Semantic Versioning](https://semver.org).
 
+## 7.0.2 - 2026-05-20
+
+### Added
+
+- apiCustomErrorResponse() for custom responses
+
+### Changed
+
+- property type array for $responseArrayFormat 
+
+### Deprecated
+
+- Nothing
+
+### Removed
+
+- Nothing
+
+### Fixed
+
+- Nothing
+
 ## 7.0.1 - 2025-05-25
 
 ### Added
